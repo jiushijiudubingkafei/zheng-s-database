@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedded JBrowse</title>
+    <style>
+    body {
+      background: blue;
+      color: white
+    }
+
+    .jbrowse {
+      height: 300px;
+      width: 600px;
+      padding: 0;
+      margin-left: 5em;
+      border: 1px solid #ccc
+    }
+  </style>
+  </head>
+  <body>
+    <div style="padding: 0 1em; margin: 1em 0; border: 1px solid black">
+      <h1>Custom JBrowse Embedded in a <code>div</code></h1>
+      <div class="jbrowse" id="GenomeBrowser">
+        <div id="LoadingScreen" style="padding: 50px;">
+          <h1>Loading...</h1>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../dist/browser.bundle.js" charset="utf-8"></script>
+    <script>
+    var features = []
+    // Add some features
+    var config = {
+      containerID: 'GenomeBrowser',
+      baseUrl: '../',
+      refSeqs: {
+        url: '../JBrowse-1.16.5/index.html?data=Arabidopsis_thaliana&amp;loc=1%3A12330001..21240000&amp;tracks=GFF3%20Annotations%2CDNA&amp;highlight=',
+      },
+      tracks: [
+        {
+          key: 'GRCH38 Reference Sequence',
+          label: 'GRCH38 Reference Sequence',
+          urlTemplate: '../JBrowse-1.16.5/index.html?data=Arabidopsis_thaliana&amp;loc=1%3A12330001..21240000&amp;tracks=GFF3%20Annotations%2CDNA&amp;highlight='
+        },
+        {
+          key: 'MyTrack',
+          label: 'MyTrack',
+          storeClass: 'JBrowse/Store/SeqFeature/FromConfig',
+          features: features,
+          type: 'CanvasVariants'
+        }
+      ]
+    };
+
+    // Add to the config or tracks
+
+    // Instantiate JBrowse
+    window.addEventListener('load', () => {
+      window.JBrowse = new window.Browser( config );
+    })
+  </script>
+    
+  </body>
+</html>

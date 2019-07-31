@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="echarts.js"></script>
+    <script src="echarts-gl.js"></script>
+    <script src="dataTool.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta http-equiv="Content-Languge" content="zh-CN">
+    <title>search</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- DataTables -->
+    <!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/sl-1.2.6/datatables.min.css"/-->
+    <link rel="stylesheet" type="text/css" href="http://localhost/db/css1.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/sl-1.2.6/datatables.min.js"></script>
+    <style>
+        #example tr>td{
+            text-align: center;
+        }
+        .dataTables_scrollHead thead th {
+            text-align: center !important;
+        }
+        td:first-child{
+            color: #1abc9c;
+        }
+    </style>
+  </head>
+  <body>
+    <script>$(document).ready( function () {
+    $('#tableidexample').DataTable();
+} );  </script>
+    <nav class="navbar navbar-default" role="navigation" style="background-color:rgb(34,34,34)">
+      <div class="container-fluid">
+        <div class="navbar-header"> <a class="navbar-brand" href="#">WBBC</a> </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li><a href="/db/of%20angry%20man.html"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+            <li><a href="/db/search.html"><span class="glyphicon glyphicon-search"></span>Search</a></li>
+            <li><a href="/db/about.html"><span class="glyphicon glyphicon-user"></span>About</a></li>
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-book"></span>GenomeBrowse</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="banner" style="padding-top:20px;padding-bottom:20dx;margin-top:-10px;background-color:rgb(24,37,46);color:#F8F8F8">
+      <div class="container-fluid">
+        <div class="col-md-10">
+          <p id="slogan" style="font-size:20px;color:rgb(216,161,6);">Search </p>
+          <div class="gb_rd gb_Id gb_zd gb_yd"></div>
+          <div class="gb_rd gb_Id gb_zd gb_yd"></div>
+          <p style="font-size:20px;color:rgb(216,161,6);"></p>
+          <p class="lead"> Choosing a query type, and then paste search terms
+            and specify annotation datasets to search </p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="container-fluid">
+      <div class="col-md-10 col-md-offset-1">
+        <form id="batch-search" role="form" method="post"> <label for="">query
+            by</label>
+          <div class="radio"> <label><input id="chr" name="searchtype" value="chr"
+                type="radio">chr</label><a class="examples" name="chr" href="javascript:void()"
+              onclick="show2('Y\n3', 'chr');return false;"> example </a><label><input
+                id="begining" name="searchtype" value="begining" type="radio">begining</label><a
+              class="examples" name="begining" href="javascript:void()" onclick="show2('2835608\n2811034', 'begining');return false;">
+              example </a><label><input id="Ref" name="searchtype" value="Ref"
+                type="radio">Ref</label><a class="examples" name="Ref" href="javascript:void()"
+              onclick="show2('T\nG', 'Ref');return false;"> example </a><label><input
+                id="Alt" name="searchtype" value="Alt" type="radio">Alt</label><a
+              class="examples" name="Alt" href="javascript:void()" onclick="show2('C\nA', 'Alt');return false;">
+              example </a><label><input id="Function" name="searchtype" value="Function"
+                type="radio">Function</label><a class="examples" name="Function"
+              href="javascript:void()" onclick="show2('ncRNA_intronic\nintronic', 'Function');return false;">
+              example </a><label><input id="Gene" name="searchtype" value="Gene"
+                type="radio">Gene</label><a class="examples" name="Gene" href="javascript:void()"
+              onclick="show2('ZFY-AS1\nZFY', 'Gene');return false;"> example </a><label><input
+                id="ExonicFunc" name="searchtype" value="ExonicFunc" type="radio">ExonicFunc</label><a
+              class="examples" name="ExonicFunc" href="javascript:void()" onclick="show2('synonymous SNV\nmissense SNV', 'ExonicFunc');return false;">
+              example </a><label><input id="AAChange" name="searchtype" value="AAChange"
+                type="radio">AAChange</label><a class="examples" name="AAChange"
+              href="javascript:void()" onclick="show2('IQCG:NM_001134435:exon3:c.C279T:p.C93C,IQCG:NM_001323027:exon3:c.C279T:p.C93C,IQCG:NM_001323028:exon3:c.C222T:p.C74C,IQCG:NM_001323030:exon4:c.C279T:p.C93C,IQCG:NM_032263:exon4:c.C279T:p.C93C\nNM_001323027:exon3:c.282+6G>C;NM_001134435:exon3:c.282+6G>C;NM_001323028:exon3:c.225+6G>C;NM_032263:exon4:c.282+6G>C;NM_001323030:exon4:c.282+6G>C', 'AAChange');return false;">
+              example </a><label><input id="changeID" name="searchtype" value="changeID"
+                type="radio">changeID</label><a class="examples" name="changeID"
+              href="javascript:void()" onclick="show2('1:862383:C:T\n1:862389:A:G', 'changeID');return false;">
+              example </a> </div>
+          <div class="form-group"> <label for="">search term</label> <textarea
+id="searchterms" class="form-control" rows="10" name="searchterms"></textarea><button
+              type="button" onclick="if(putinsubmit()){showresult();renewajax();settable();}">
+              Submit </button> &nbsp; <input name="reset" value="Reset" type="reset">
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="paste"></div>
+            <br>
+            <br>
+            <br>
+            <div id="pastegraph"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br>
+    <br>
+    <footer class="footer">
+      <p class="text-center"> Copyright © Westlake University, Zheng's team |<a
+          href="javascript:void(0)">contract us</a> </p>
+      <p class="text-center"> For a better browsing experience, we recommend
+        using Firefox or Chrome browser, click image right to download<a class="not-new-window"
+          href="https://www.mozilla.org" target="_blank"><img src="/db/firefox.png"
+            alt="Firefox browser" style="width:73px;height:75px"></a> &nbsp;<a class="not-new-window"
+          href="https://www.google.com/chrome/browser" target="_blank"><img src="/db/chrome.png"
+            alt="chrome browser" style="width:68px;height:68px"></a></p>
+      <div style="max-width: 341px; margin: 0px auto;">
+        <div style="position: relative; padding-top:100%;">
+          <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0scvd9thxqh&m=7&c=0006ff&cr1=54ff00&f=times_new_roman&l=0&s=341"
+async="async"></script> </div>
+      </div>
+    </footer>
+    <script>
+    
+    function putinsubmit(){
+    
+    	var searchterms= $("#searchterms").val();
+    	var n=String(searchterms).match(/\n/g);
+      if(String(n).length > 18){
+      
+        window.alert("Please control your input within ten lines, thank you.");
+      	return false;
+      
+      }
+      return true;
+    }
+    
+    </script>
+    <script>
+    function showresult(){
+    var strnewtable = "<div id=\"result\" class=\"\"><h3> Search result <button class=\"btn btn-danger button-delete\">delete </button><table id=\"tableidexample\" class=\"stripe hover cell-border order-column\" margin-left:0=\"\" width=\"99%\"cellspacing=\"0\"><thead><tr style=\"height:45px;\"><th>chr</th><th>begining</th><th>Ref</th><th>Alt</th><th>Function</th><th>Gene</th><th>ExonicFunc</th><th>AAChange</th><th>avsnp150</th><th>1000g2015aug_all</th><th>esp6500siv2_all</th><th>ExAC_ALL</th><th>SIFT</th><th>Polyphen2</th><th>changeID</th></tr></thead><tbody></tbody></table></h3></div>";
+      var strnewgraph = "<div id=\"main\" style=\"width: 100%;height:400px;\"></div>"
+      document.getElementById('paste').innerHTML = strnewtable;
+      document.getElementById('paste').style="border:2px solid green;padding:10px";
+      document.getElementById('pastegraph').innerHTML = strnewgraph;
+      document.getElementById('pastegraph').style="border:2px solid green;padding:10px";
+      show3();
+    }
+    </script>
+    <script type="text/javascript">
+      function show3(){
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: [
+        
+    ],
+    tooltip: {
+        trigger: 'item',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+    },
+    xAxis: {
+        data: ['1000g2015aug_all', 'esp6500siv2_all', 'ExAC_ALL']
+    },
+    yAxis: {
+        type: 'value',
+        splitArea: {
+            show: true
+        }
+    },
+    series: [
+        {
+            name: 'boxplot',
+            type: 'boxplot',
+            data: [],
+            tooltip: {
+                formatter: function (param) {
+                    return [
+                        'Experiment ' + param.name + ': ',
+                        'upper: ' + param.data[5],
+                        'Q3: ' + param.data[4],
+                        'median: ' + param.data[3],
+                        'Q1: ' + param.data[2],
+                        'lower: ' + param.data[1]
+                    ].join('<br/>');
+                }
+            }
+        },
+        {
+            name: 'outlier',
+            type: 'scatter',
+            data: []
+        }
+    ]
+};
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+         
+         var data=[];
+        
+        $.ajax({
+         type : "post",
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "datagraph.php",    //请求发送到TestServlet处
+         data : {
+         	"searchterms": $("#searchterms").val(),
+        "searchtype": renewajax()
+         },
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if(result)
+        {
+          myChart.hideLoading();
+          data=echarts.dataTool.prepareBoxplotData(result);
+          myChart.setOption({
+                 series:[{data:data.boxData},{data:data.outliers}]
+             });
+        }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert(errorMsg);
+           window.alert("error");
+         myChart.hideLoading();
+         }
+    })
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);}
+    </script>
+    <script>
+      function show2(name, id) {  
+  $("#searchterms").val(name);
+  document.getElementById(id).checked="true";
+      }
+    </script>
+    <script>
+    
+      function renewajax(){
+    var searchtypesearch = document.getElementsByName('searchtype');
+        var searchtype = "undefinded";
+	for (var i = 0, length = searchtypesearch.length; i < length; i++) {
+		if (searchtypesearch[i].checked) {
+			// 弹出选中值
+      searchtype = searchtypesearch[i].value
+			// 选中后退出循环
+			break;
+		}
+	}
+        return searchtype;
+      }
+      
+      
+      function gotoandsearch(thing){
+      
+      	var searchthing = String(thing);
+        var s1 = 'changesearch.html?changeID='+searchthing;
+        window.location.href=s1;
+        window.alert("changeID="+searchthing);
+      
+      }
+      
+      function settable(){
+      var i = 0;
+      var table = $('#tableidexample').DataTable(
+        {
+        "searching": true,
+          "select": true,
+           "deferRender": true,
+          "ordering": true,
+          "order": [[ 14, 'asc' ]],
+        "bPaginate": true, //翻页功能
+        "bLengthChange": true, //改变每页显示数据数量
+        "bFilter": true, //过滤功能
+        "bSort": false, //排序功能
+        "sPaginationType": "full_numbers",
+          "processing": true,
+          "scrollX": true,
+          "scrollY": "800px",
+  "scrollCollapse": true,
+          "orderClasses": true,
+          "dom": '<"top"lpiB>rt<"bottom"f><"clear">',
+    "buttons": [ {extend:'columnsToggle'} ,
+              {extend:'copyHtml5'},
+              {extend:'csvHtml5'},
+              {extend: 'excelHtml5'},
+              {extend: 'pdfHtml5'},
+              {extend:'print'},
+             ],
+        "ajax": {
+          "type" : "post",
+    "url": "data.php",
+    "data": {
+      "searchterms": $("#searchterms").val(),
+        "searchtype": renewajax()
+    }
+  } ,
+          "columns": [
+            //{
+               // "class":          "details-control",
+                //"data":           null,
+                //"orderable":      false,
+                //"defaultContent": ""
+            //},
+            { "data": "chr" },
+        { "data": "begining" },
+        { "data": "Ref" },
+        { "data": "Alt" },
+        { "data": "Function" },
+        { "data": "Gene" },
+        { "data": "ExonicFunc" },
+        { "data": "AAChange" },
+        { "data": "avsnp150" },
+        { "data": "1000g2015aug_all" },
+        { "data": "esp6500siv2_all" },
+        { "data": "ExAC_ALL" },
+        { "data": "SIFT" },
+        { "data": "Polyphen2" },
+        { "data": "changeID", "targets" : 14 }
+        ],
+          
+          "columnDefs":[
+          {"render": function(data, type, row) {
+            return '<a onclick=\"gotoandsearch(\''+data+'\');return false;\">'+data+'</a>';}, "targets" : 14}
+          ]
+    });
+    var param = {
+        "searchterms": $("#searchterms").val(),
+        "searchtype": renewajax()
+    };
+    table.settings()[0].ajax.data = param;
+    table.ajax.reload();}
+      $.fn.dataTable.ext.buttons.mod = {
+   className: 'buttons-mod',
+   action: function ( e, dt, node, config ) {   
+     alert("button"); 
+   }
+};
+      $.fn.dataTable.ext.buttons.columnsToggleing = {
+   className: 'buttons-mod',
+   action: function ( e, dt, node, config ) {   
+     alert("button"); 
+   }
+};
+
+    </script>
+    <script>
+function loadXMLDoc()
+{
+  var xmlhttp;
+  var data = {
+                "searchterms": $('#searchterms').val(),
+                "searchtype": $('input[name="searchtype"]:checked').val()
+            }
+  var data= JSON.stringify(data); 
+  if (window.XMLHttpRequest)
+  {
+    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+    xmlhttp=new XMLHttpRequest();
+  }
+  else
+  {
+    // IE6, IE5 浏览器执行代码
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function()
+  {
+    var n = xmlhttp.responseText.split("<br>");
+    var m = n.length;
+    for(var i=0;i<n.lenh;i++)
+    {
+      var m = n[i];
+      for(var j = 0; j < m.length; j++){
+    
+        //document.getElementById("table_id_example").innerHTML=n;
+        var data = n;
+      }   
+    }
+  }
+  xmlhttp.open("POST","data.php",true);
+  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xmlhttp.send("data="+data);
+  alert("提交");
+}
+</script> <script>
+      function show1(name) {
+        var name1=name.replace(/%20/g," ");
+  $("#searchterms").val(name1);
+      }
+      
+    var thisURL = location.href;	// 获取当前页面的 url, 用decodeURI() 解码 
+    if(thisURL.indexOf("?") > 0){
+    var getVal = thisURL.split('?')[1]; 
+      var showVal= getVal.split("=")[1]; 
+		show1(showVal);
+      showresult();
+      renewajax();
+      settable();
+    }
+    //tableidexample.Rows[1][2].ToString()
+    </script>
+    
+  </body>
+</html>

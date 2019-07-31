@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta http-equiv="Content-Languge" content="zh-CN">
+    <title>welcomepage</title>
+  </head>
+  <body>
+    <script>function show1(name) {
+        $('#item').val(name);
+      }
+    </script>
+    <script>
+      function gotoandsearch(){
+        var s = document.getElementById("item");
+        var s1 = "search.html?searchterms=".concat(encodeURI(s.value));
+        window.location.href=s1;
+        window.alert("searchterms=".concat(encodeURI(s.value)));
+}
+    </script>
+    <script>
+      window.onresize = function(){
+      	if($document.body.clientHeight>100px){
+      		document.getElementById("disclaimer-modal").style="display:block;padding-right: 12px;";
+        } 
+        else if ($document.body.clientHeight<100px){ 
+          document.getElementById("disclaimer-modal").style="display:block;";
+        }
+      }
+    </script>
+    <script>
+    	function close1(){
+      	document.getElementById("disclaimer-modal").class="modal";
+      }
+    </script>
+    <script>
+        function showmap(){
+ 					type="text/javascript" src="http://ra.revolvermaps.com/0/0/6.js" async="async">;
+				}
+</script> <nav class="navbar navbar-default" role="navigation" style="background-color:rgb(34,34,34)">
+      <div class="container-fluid">
+        <div class="navbar-header"> <a class="navbar-brand" href="#">WBBC</a> </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+            <li><a href="/db/search.html"><span class="glyphicon glyphicon-search"></span>Search</a></li>
+            <li><a href="/db/about.html"><span class="glyphicon glyphicon-user"></span>About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="banner" style="padding-top:30px;padding-bottom:40dx;margin-top:-10px;background-color:rgb(24,37,46);color:#F8F8F8">
+      <div class="container-fluid">
+        <div class="col-md-10">
+          <p id="slogan" style="font-size:35px;color:rgb(216,161,6);">WBBC </p>
+          <div class="row">
+            <div class="col-md-6 rectangle">
+              <p><span class="glyphicon glyphicon-tag"></span> Epidemiological
+                data ang clinical case information resources data base.</p>
+            </div>
+            <div class="col-md-6 rectangle">
+              <p><span class="glyphicon glyphicon-tag"></span> Research cohort
+                for adolescents.</p>
+            </div>
+            <div class="col-md-6 rectangle">
+              <p><span class="glyphicon glyphicon-tag"></span> Research cohort
+                for osteoporosis and fracture. </p>
+            </div>
+            <div class="col-md-6 rectangle">
+              <p><span class="glyphicon glyphicon-tag"></span> Large research
+                cohort for babies and children.</p>
+            </div>
+            <div class="col-md-6 rectangle">
+              <p><span class="glyphicon glyphicon-tag"></span> “Nation People
+                Difference” project.</p>
+            </div>
+            <div class="col-md-6 rectangle">
+              <p><span class="glyphicon glyphicon-tag"></span> “Surname People
+                Difference” project.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid"> <br>
+      <br>
+      <div class="col-md-8 col-md-offset-1">
+        <form id="searchfrom" class="quick" action="search.html" method="POST">
+          <div class="form-group">
+            <div class="input-group"> <input id="item" class="from-control" name="item"
+                placeholder="gene symbol, RefSeq accession, variant, genomic region"
+                type="textbox"> <span class="input-gropu-bin"> <button class="bin bin-danger"
+                  type="submit" title="Click to search" onclick="gotoandsearch();"
+                  target="_blank"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button> </span> </div>
+            examples: <a class="tip" href="javascript:void()" onclick="show1('1');return false;">1</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('862383');return false;">862383</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('C');return false;">C</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('T');return false;">T</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('intronic');return false;">intronic</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('SAMD11');return false;">SAMD11</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('missense SNV');return false;">missense
+              SNV</a> &nbsp; <a class="tip" href="javascript:void()" onclick="show1('SAMD11:NM_152486:exon3:c.C232T:p.H78Y');return false;">SAMD11:NM_152486:exon3:c.C232T:p.H78Y</a>
+            &nbsp; <a class="tip" href="javascript:void()" onclick="show1('1:862383:C:T');return false;">1:862383:C:T</a>
+          </div>
+        </form>
+        <br>
+        <br>
+        <h2> What is WBBC? </h2>
+        <hr style="border:2px solid black">
+        <p class="lead text-justify"> Westlake BioBank for Chinese(WBBC) project
+          will analysis and study of the genome data related to human disease
+          health. The project will provide accurate and reliable prediction
+          methods and decision-making basis for disease screening, diagnosis,
+          prevention, control and treatment. And it will provide a more accurate
+          treatment for the individual patient. Through the establishment of DNA
+          sample library and database, to provide services for all areas of
+          society. Nowadays Birth-defect, chronic disease and therioma have
+          become the most serious kinds of disease affecting the health of the
+          people with the development of medical technology. These diseases are
+          highly inherited. So it is urgent to carry out a large-scale
+          epidemiological investigation and genetic research to find out the
+          etiology and pathogenesis of the disease.</p>
+        <br>
+        <br>
+        <h2> Publication detail </h2>
+        <hr style="border:2px solid black">
+        <p> <a class="not-new-window" href="javascript:void(0)" target="_blank">DB:
+            an integrated genetic and clinical database for coding variants in
+            the human genome.</a>2018. Nucleic Acids Research. </p>
+        <br>
+        <br>
+      </div>
+      <div class="col-md-2">
+        <p class="panel-title"> Recent Updates</p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <footer class="footer">
+      <p class="text-center"> Copyright © Westlake University, Zheng's team |<a
+          href="javascript:void(0)">contract us</a> </p>
+      <p class="text-center"> For a better browsing experience, we recommend
+        using Firefox or Chrome browser, click image right to download<a class="not-new-window"
+          href="https://www.mozilla.org" target="_blank"><img src="/db/firefox.png"
+            alt="Firefox browser" style="width:73px;height:75px"></a> &nbsp;<a class="not-new-window"
+          href="https://www.google.com/chrome/browser" target="_blank"><img src="/db/chrome.png"
+            alt="chrome browser" style="width:68px;height:68px"></a></p>
+      <div style="max-width: 341px; margin: 0px auto;">
+        <div style="position: relative; padding-top:100%;">
+          <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0scvd9thxqh&m=7&c=0006ff&cr1=54ff00&f=times_new_roman&l=0&s=341"
+async="async"></script> </div>
+      </div>
+    </footer>
+  </body>
+</html>

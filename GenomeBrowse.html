@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta http-equiv="Content-Languge" content="zh-CN">
+    <title>aboutpage</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#ffffff">
+    <script type="text/javascript">
+        window.onerror=function(msg){
+            if( document.body )
+                document.body.setAttribute("JSError",msg);
+        }
+        if(window.process&&process.versions&&process.versions.electron) {
+            window.electronRequire = require;
+            delete window.require;
+        }
+    </script>
+    <style>
+        html, body, div.jbrowse {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="dist/main.bundle.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation" style="background-color:rgb(34,34,34)">
+      <div class="container-fluid">
+        <div class="navbar-header"> <a class="navbar-brand" href="#">WBBC</a> </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li><a href="/db/of%20angry%20man.html"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+            <li><a href="/db/search.html"><span class="glyphicon glyphicon-search"></span>Search</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>About</a></li>
+            <li class="active"><a href="/db/GenomeBrowse.html"><span class="glyphicon glyphicon-book"></span>GenomeBrowse</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="banner" style="padding-top:30px;padding-bottom:40dx;margin-top:-10px;background-color:rgb(24,37,46);color:#F8F8F8">
+      <div class="container-fluid">
+        <div class="col-md-10">
+          <p id="slogan" style="font-size:20px;color:rgb(216,161,6);">Genome
+            Browse </p>
+          <div class="row">
+            <div class="col-md-6 rectangle">
+              <p>get the genome browse you are interested in</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="col-md-10 col-md-offset-1"> <textarea id="searchterms"
+class="form-control" rows="10" name="searchterms"></textarea><button type="button"
+        onclick="if(putinsubmit()){showresult();renewajax();settable();}">
+        Submit </button> <br>
+    </div>
+    <h1>Volvox JBrowse Embedded in an <code>iframe</code></h1>
+    <div style="width: 600px; margin: 0 auto;">
+      <!--<iframe id="changegraph" src="../JBrowse-1.16.5/index.html?data=Arabidopsis_thaliana&amp;loc=1%3A12330001..21240000&amp;tracks=GFF3%20Annotations%2CDNA&amp;highlight="
+        style="border: 1px solid black" width="600" height="300"> </iframe>--> </div>
+    <br>
+    <br>
+    <hr>
+    <footer class="footer">
+      <p class="text-center"> Copyright © Westlake University, Zheng's team |<a
+          href="javascript:void(0)">contract us</a> </p>
+      <p class="text-center"> For a better browsing experience, we recommend
+        using Firefox or Chrome browser, click image right to download<a class="not-new-window"
+          href="https://www.mozilla.org" target="_blank"><img src="/db/firefox.png"
+            alt="Firefox browser" style="width:73px;height:75px"></a> &nbsp;<a class="not-new-window"
+          href="https://www.google.com/chrome/browser" target="_blank"><img src="/db/chrome.png"
+            alt="chrome browser" style="width:68px;height:68px"></a></p>
+      <div style="max-width: 341px; margin: 0px auto;">
+        <div style="position: relative; padding-top:100%;">
+          <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0scvd9thxqh&m=7&c=0006ff&cr1=54ff00&f=times_new_roman&l=0&s=341"
+async="async"></script> </div>
+      </div>
+    </footer>
+    <script>
+  function showresult(){
+  
+  document.getElementById("changegraph").src="../JBrowse-1.16.5/index.html?data=" + $("#searchterms").val();
+  
+  }
+  
+  
+  
+    function putinsubmit(){
+    
+    	var searchterms= $("#searchterms").val();
+    	var n=String(searchterms).match(/\n/g);
+      if(String(n).length > 18){
+      
+        window.alert("Please control your input within ten lines, thank you.");
+      	return false;
+      
+      }
+      return true;
+    }</script>
+  </body>
+</html>
